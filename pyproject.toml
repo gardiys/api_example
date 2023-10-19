@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "api-example"
+version = "0.1.0"
+description = ""
+authors = ["Anton Shcherbak <sherback.anton@gmail.com>"]
+readme = "README.md"
+packages = [{include = "api_example"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+uvicorn = {extras = ["standart"], version = "^0.23.2"}
+fastapi = "^0.104.0"
+pre-commit = "^3.5.0"
+dynaconf = "^3.2.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
