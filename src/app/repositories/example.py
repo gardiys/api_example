@@ -13,6 +13,14 @@ class AbstractExampleRepository(ABC):
     async def get_all_examples(self, filter: ExamplesFilter) -> list[Example]:
         pass
 
+    @abstractmethod
+    async def create_example(self, name: str, description: str) -> Example:
+        pass
+
+    @abstractmethod
+    async def commit(self):
+        pass
+
 
 class SQLExampleRepository(AbstractExampleRepository):
     def __init__(self, db_session: AsyncSession):
@@ -30,6 +38,7 @@ class SQLExampleRepository(AbstractExampleRepository):
         q = select(
             models.Examples.id,
             models.Examples.name,
+            models.Examples.description,
             models.Examples.created_at,
             models.Examples.updated_at,
         ).where(and_(*filters))
@@ -41,8 +50,24 @@ class SQLExampleRepository(AbstractExampleRepository):
                 Example(
                     id=example.id,
                     name=example.name,
+                    description=example.description,
                     created_at=example.created_at,
                     updated_at=example.updated_at,
                 )
             )
         return data
+
+    async def create_example(self, name: str, description: str) -> Example:
+        raw_object = models.Examples(name=name, description=description)
+        self.db_session.add(raw_object)
+        await self.db_session.flush()
+        return Example(
+            id=raw_object.id,
+            name=raw_object.name,
+            description=raw_object.description,
+            created_at=raw_object.created_at,
+            updated_at=raw_object.updated_at,
+        )
+
+    async def commit(self):
+        await self.db_session.commit()

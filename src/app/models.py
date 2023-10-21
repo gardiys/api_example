@@ -16,6 +16,7 @@ class Examples(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]
+    description: Mapped[str | None]
     created_at: Mapped[datetime.datetime] = mapped_column(
         DateTime(timezone=settings.timezone), server_default=func.now()
     )

@@ -1,0 +1,10 @@
+app_env: dev
+database:
+  host: db
+  port: 5432
+  db: example
+  user: example
+  password: example
+
+first_external_host: http://web1.org
+second_external_host: http://web2.org

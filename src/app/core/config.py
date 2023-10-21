@@ -23,6 +23,8 @@ class Settings(BaseSettings):
     tz: ZoneInfo
     app_env: str
     db_dsn: str
+    first_external_host: str
+    second_external_host: str
 
 
 settings = Settings(
@@ -31,4 +33,6 @@ settings = Settings(
     tz=ZoneInfo(_project_timezone),
     app_env=_settings.app_env,
     db_dsn=str(_db_dsn),
+    first_external_host=_settings.first_external_host,
+    second_external_host=_settings.second_external_host,
 )
