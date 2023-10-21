@@ -21,14 +21,9 @@ def make_pg_options(
 
 
 async_engine = create_async_engine(
-    settings.app_db_dsn,
+    settings.db_dsn,
     connect_args={"server_settings": make_pg_options()},
-    echo=bool(settings.app_env == AppEnvEnum.local.value),
+    echo=bool(settings.app_env == AppEnvEnum.dev.value),
 )
 
-async_session = async_sessionmaker(engine=async_engine, expire_on_commit=False)
-
-
-async def get_async_session():
-    async with async_session() as session:
-        yield session
+async_session = async_sessionmaker(bind=async_engine, expire_on_commit=False)

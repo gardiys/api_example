@@ -11,7 +11,7 @@ services:
     volumes:
       - ./src:/var/install/api/
       - ./pyproject.toml:/var/install/api/pyproject.toml
-      - ./config.yaml:/etc/app_config/config.yaml
+      - ./config.yaml:/var/install/api/config.yaml
     depends_on:
       - db
     command: >
@@ -20,8 +20,8 @@ services:
   db:
     image: postgres:16
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=events_feed
+      - POSTGRES_USER=example
+      - POSTGRES_PASSWORD=example
+      - POSTGRES_DB=example
     ports:
       - "5432:5432"
