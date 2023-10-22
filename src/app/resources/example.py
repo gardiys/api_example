@@ -39,7 +39,7 @@ async def create_example(example: CreateExample):
         example = await example_service.create_example(
             name=example.name,
             example_repository=SQLExampleRepository(db_session=session),
-            first_external_service=HTTPFirstExternalRepository(),
-            second_external_service=HTTPSecondExternalRepository(),
+            first_external_repository=HTTPFirstExternalRepository(),
+            second_external_repository=HTTPSecondExternalRepository(),
         )
         return example

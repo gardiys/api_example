@@ -17,12 +17,12 @@ async def get_examples(
 async def create_example(
     name: str,
     example_repository: AbstractExampleRepository,
-    first_external_service: AbstractFirstExternalRepository,
-    second_external_service: AbstractSecondExternalRepository,
+    first_external_repository: AbstractFirstExternalRepository,
+    second_external_repository: AbstractSecondExternalRepository,
 ) -> Example:
     first_description_result, second_description_result = await asyncio.gather(
-        first_external_service.get_description_by_name(name=name),
-        second_external_service.get_description_by_name(name=name),
+        first_external_repository.get_description_by_name(name=name),
+        second_external_repository.get_description_by_name(name=name),
     )
     if len(first_description_result) > len(second_description_result):
         description = first_description_result

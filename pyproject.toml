@@ -15,6 +15,8 @@ dynaconf = "^3.2.3"
 sqlalchemy = "^2.0.22"
 pydantic-settings = "^2.0.3"
 asyncpg = "^0.28.0"
+pytest = "^7.4.2"
+pytest-asyncio = "^0.21.1"
 
 
 [build-system]
